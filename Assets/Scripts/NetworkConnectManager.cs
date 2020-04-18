@@ -7,21 +7,54 @@
         [Tooltip("The maximum number of players per room. When a room is full, it can't be joined by new players, and so new room will be created")]
         public byte MaxPlayersPerRoom = 4;
         public PhotonLogLevel Loglevel = PhotonLogLevel.Informational;
-
-        void Awake() {
-            if (!PhotonNetwork.connecting && !PhotonNetwork.connected) {
-                PhotonNetwork.autoJoinLobby = false;    // we join randomly. always. no need to join a lobby to get the list of rooms.
+        public FirstScreen fs;
+        public void TeacherConnect()
+        {
+            Debug.Log("Teacher connect method");
+            if (!PhotonNetwork.connecting && !PhotonNetwork.connected)
+            {
+                PhotonNetwork.autoJoinLobby = false;
                 PhotonNetwork.automaticallySyncScene = false;
                 PhotonNetwork.logLevel = Loglevel;
                 PhotonNetwork.ConnectUsingSettings(gameVersion);
             }
         }
 
-        public override void OnConnectedToMaster() {
-            Debug.Log("Connected to master");
+        public void StudentConnect()
+        {
+            Debug.Log("Student connect method");
+            if (!PhotonNetwork.connecting && !PhotonNetwork.connected)
+            {
+                PhotonNetwork.autoJoinLobby = false;
+                PhotonNetwork.automaticallySyncScene = false;
+                PhotonNetwork.logLevel = Loglevel;
+                PhotonNetwork.ConnectUsingSettings(gameVersion);
+            }
+        }
+        //void Awake() {
+         //   if (!PhotonNetwork.connecting && !PhotonNetwork.connected) {
+          //      PhotonNetwork.autoJoinLobby = false;    // we join randomly. always. no need to join a lobby to get the list of rooms.
+           //     PhotonNetwork.automaticallySyncScene = false;
+           //     PhotonNetwork.logLevel = Loglevel;
+            //    PhotonNetwork.ConnectUsingSettings(gameVersion);
+          //  }
+       // }
 
-            Debug.Log("Joining random room...");
-            PhotonNetwork.JoinRandomRoom();
+        public override void OnConnectedToMaster() {
+            fs.resultt.text = "Connected to master";
+            if(fs.teacher==true)
+            {
+                var options = new RoomOptions();
+                PhotonNetwork.CreateRoom(fs.ccn, options, null);
+                Debug.Log("Creating room");
+                fs.resultt.text = "Creating room";
+            }
+            else
+            {
+                PhotonNetwork.JoinRoom(fs.jcn);
+                fs.resultt.text = "Joining room";
+            }
+
         }
 
         public override void OnJoinedLobby() {
@@ -35,21 +68,22 @@
             Debug.Log("Left lobby");
         }
 
-        public override void OnPhotonRandomJoinFailed(object[] codeAndMsg) {
-            Debug.Log("Can't join random room!");
-
-            Debug.Log("Creating room...");
-            var options = new RoomOptions();
-            options.MaxPlayers = MaxPlayersPerRoom;
-            PhotonNetwork.CreateRoom(null, options, null);
+        public override void OnPhotonJoinRoomFailed(object[] codeAndMsg) {
+            fs.resultt.text = "Can't join room!";
+            fs.NCall();
         }
 
+        public override void OnPhotonCreateRoomFailed(object[] codeAndMsg)
+        {
+            fs.resultt.text = "Can't create room!";
+            fs.NCall();
+        }
         public override void OnCreatedRoom() {
-            Debug.Log("Created room");
+            fs.resultt.text = "Created room";
         }
 
         public override void OnJoinedRoom() {
-            Debug.Log("Joined room");
+            fs.resultt.text = "Joined room";
         }
 
         public override void OnLeftRoom() {
