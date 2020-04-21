@@ -12,6 +12,7 @@
         private GameObject[] spawnPoints;
         private bool sceneLoaded = false;
         private bool connected = false;
+        public bool spawned=false;
 
         void Awake() {
             if (playerAvatar == null||playerAvatar2==null) {
@@ -74,11 +75,14 @@
             if (fs.avi == 1)
             {
                 var player = PhotonNetwork.Instantiate(playerAvatar.name, trans.position, trans.rotation, 0, new object[] { name });
+                spawned = true;
             }
             else
             {
                 var player = PhotonNetwork.Instantiate(playerAvatar2.name, trans.position, trans.rotation, 0, new object[] { name });
+                spawned = true;
             }
+
         }
 
         private string playerName(PhotonPlayer ply) {

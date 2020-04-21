@@ -61476,6 +61476,7 @@ GameObject:
   - component: {fileID: 1461049259}
   - component: {fileID: 1461049258}
   - component: {fileID: 1461049261}
+  - component: {fileID: 1461049263}
   m_Layer: 0
   m_Name: Networking
   m_TagString: Untagged
@@ -61495,6 +61496,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 642757e5fb114ae49b5ace44dba12c7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  started: 0
   MaxPlayersPerRoom: 4
   Loglevel: 1
   fs: {fileID: 1898072576}
@@ -61554,6 +61556,7 @@ MonoBehaviour:
   playerAvatar2: {fileID: 1396155991360138, guid: 1c40c6316b3cb194e8c7f03c7f183db7,
     type: 3}
   fs: {fileID: 1898072576}
+  spawned: 0
 --- !u!4 &1461049262
 Transform:
   m_ObjectHideFlags: 0
@@ -61568,6 +61571,22 @@ Transform:
   m_Father: {fileID: 138227221}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1461049263
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1461049257}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba474e60817716146933e16a9defe531, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  message: 
+  gotMessage: 0
+  ph: {fileID: 1461049261}
+  fh: {fileID: 1898072576}
 --- !u!1 &1462206893
 GameObject:
   m_ObjectHideFlags: 0

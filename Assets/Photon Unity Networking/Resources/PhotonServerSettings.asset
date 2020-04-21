@@ -50,4 +50,5 @@ MonoBehaviour:
   - SetColor
   - SetTouchPosition
   - ToggleTouch
+  - x
   DisableAutoOpenWizard: 1

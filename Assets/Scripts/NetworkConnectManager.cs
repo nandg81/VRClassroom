@@ -3,7 +3,7 @@
 
     public class NetworkConnectManager : Photon.PunBehaviour {
         public static string gameVersion = "0.4";
-
+        public bool started;
         [Tooltip("The maximum number of players per room. When a room is full, it can't be joined by new players, and so new room will be created")]
         public byte MaxPlayersPerRoom = 4;
         public PhotonLogLevel Loglevel = PhotonLogLevel.Informational;
@@ -80,10 +80,12 @@
         }
         public override void OnCreatedRoom() {
             fs.resultt.text = "Created room";
+            started = true;
         }
 
         public override void OnJoinedRoom() {
             fs.resultt.text = "Joined room";
+            started = true;
         }
 
         public override void OnLeftRoom() {
